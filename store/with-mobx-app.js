@@ -10,7 +10,7 @@ function initializeStore(userInfo) {
 }
 
 export default (Comp) => {
-    class withReduxApp extends React.Component {
+    class WithMobxApp extends React.Component {
         constructor(props) {
             super(props)
             // getInitialProps创建了store 这里为什么又重新创建一次？
@@ -37,7 +37,7 @@ export default (Comp) => {
     // 这个其实是_app.js的getInitialProps
     // 在服务端渲染和客户端路由跳转时会被执行
     // 所以非常适合做redux-store的初始化
-    withReduxApp.getInitialProps = async (ctx) => {
+    WithMobxApp.getInitialProps = async (ctx) => {
         let reduxStore
 
         if (isServer) {
@@ -64,5 +64,5 @@ export default (Comp) => {
             initialMobxState: reduxStore}
     }
 
-    return withReduxApp
+    return WithMobxApp
 }

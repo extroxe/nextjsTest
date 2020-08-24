@@ -10,7 +10,7 @@ const RedisSessionStore = require("./server/session-store")
 const dev = process.env.NODE_ENV !== "production"
 const app = next({dev})
 const handle = app.getRequestHandler()
-
+const PORT = "3000"
 const redis = new Redis()
 app.prepare().then(() => {
     const server = new Koa()
@@ -70,5 +70,5 @@ app.prepare().then(() => {
         }
     )
 
-    server.listen(3000, () => console.log("3000启动"))
+    server.listen(PORT, () => console.log(`http://localhost:${PORT}启动`))
 })

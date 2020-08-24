@@ -6,16 +6,17 @@ import WithMobxApp from '../store/with-mobx-app';
 
 class CustomApp extends App {
     static async getInitialProps(appContext) {
-        const appProps = await App.getInitialProps(appContext);
+        const {Component} = appContext
+        const pageProps = await Component.getInitialProps(appContext);
+        // console.log("aaaaaaappProps", pageProps)
+
         return {
-            ...appProps,
-            userInfo: appContext.ctx.req.session.userInfo
+            pageProps,
         };
     }
 
     render() {
         const {Component, pageProps, reduxStore} = this.props;
-        console.log("aaaaaaappProps", pageProps)
         return (
             <Provider store={reduxStore}>
                 <Container>

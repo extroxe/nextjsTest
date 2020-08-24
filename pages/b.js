@@ -17,7 +17,6 @@ const MyCount = () => {
     const [counts, dispatchCounts] = useReducer(countReducer, 0)
     const context = useContext(MyContext)
     useEffect(() => {
-        console.log(context)
         /*const count = setInterval(() => {
             dispatchCounts({type: "add"})
         }, 1000)*/
