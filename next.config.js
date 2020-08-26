@@ -1,4 +1,5 @@
 const withCss = require("@zeit/next-css")
+const withSass = require("@zeit/next-sass")
 const config = require("./config")
 const configs = {
     // distDir: "dest",
@@ -39,9 +40,10 @@ if (typeof require !== "undefined") {
 }
 
 const GITHUB_URL = "https://github.com/login/oauth/authorize"
-module.exports = withCss({
+module.exports = withSass(withCss({
+    cssModules: true,
     publicRuntimeConfig: {
         GITHUB_URL,
         OAUTH_URL: `${GITHUB_URL}?client_id=${config.github.client_id}`,
     }
-})
+}))

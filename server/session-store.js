@@ -8,7 +8,6 @@ class RedisSessionStore {
     }
 
     async get(sid) {
-        // console.log("get session:", sid)
         const id = getRedisSessionId(sid)
         const data = await this.client.get(id)
         if (!data) {

@@ -9,6 +9,7 @@ import useStores from "../store/useStore"
 import PostStore from "../store/PostStore";
 // import {observer, inject} from "mobx-react";
 import {request} from "../lib/api"
+import {Home as HomeComponent} from "../components/Home";
 
 const {publicRuntimeConfig} = getConfig()
 
@@ -40,7 +41,7 @@ export default class Home extends React.Component{
 }*/
 const Home = ({userRepos, userInfo}) => {
     const {userInfo: userInfoStore} = useStores()
-    console.log("userRepos", userRepos)
+    // console.log("userRepos", userRepos)
     return (
         <MyContext.Provider value={"contextTest"}>
             <div className="container">
@@ -48,19 +49,29 @@ const Home = ({userRepos, userInfo}) => {
                     {userInfo && userInfo.login}
                     <a style={{float: "right"}} href={publicRuntimeConfig.OAUTH_URL}>登录</a>
                 </header>
+                <HomeComponent/>
 
                 <div className={"parent-box"}>
                     <img className={"avatar"} src={`${userInfo.avatar_url}`} alt=""/>
                     <div style={{width: 800, margin: "0 auto"}}>
                         {userRepos.map(item => <div style={{padding: "15px 0", borderBottom: "1px solid #eee"}}>
-                            <h3><a style={{color: "#0366d6", fontSize: "20px"}}>{item.name}</a></h3>
+                            <a style={{color: "#0366d6", fontSize: "20px"}}>{item.name}</a>
+                            <br/>
                             <span style={{color: "#333", fontSize: "12px"}}>Full name:{item.full_name}</span>
                             <br/>
                             <span style={{color: "#333", fontSize: "14px"}}>
                                 {item.description}
                             </span>
                             <div style={{marginTop: 15, fontSize: 12}}>
-                                {item.language && <span style={{display: 'inline-block', marginRight: 15}}> <span style={{display: "inline-block", width: 12, height: 12, marginRight:4, background: item.language ==="Vue" ? "#586069" : "#f1e05a", borderRadius: "50%"}}></span>{item.language}</span>}
+                                {item.language && <span style={{display: 'inline-block', marginRight: 15}}> <span
+                                    style={{
+                                        display: "inline-block",
+                                        width: 12,
+                                        height: 12,
+                                        marginRight: 4,
+                                        background: item.language === "Vue" ? "#586069" : "#f1e05a",
+                                        borderRadius: "50%"
+                                    }}></span>{item.language}</span>}
                                 <span style={{display: 'inline-block'}}>{item.created_at}</span>
                             </div>
                         </div>)}
